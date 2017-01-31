@@ -8,6 +8,7 @@
 
 #include "Controller.hpp"
 #include <iostream>
+#include "../Model/Timer.hpp"
 
 using namespace std;
 
@@ -27,6 +28,9 @@ int Controller :: changeNumber()
 
 void Controller :: start()
 {
+    Timer sillyTime;
+    sillyTime.startTimer();
+    
     cout << "Peers said to input 'Hello, world!'" << endl;
     int sent = 874;
     
@@ -36,8 +40,16 @@ void Controller :: start()
     cout << "Here is my number again " << sent << endl;
     tryNumbers(sent);
     sent = changeNumber();
+    
     changeWithPointer(numberPointer);
     cout << "Changed? " << sent << endl;
+    
+    sillyTime.stopTimer();
+    sillyTime.displayTimingInformation();
+    
+    sillyTime.resetTimer();
+    cout << sillyTime.getExecutionTimeInMicroseconds() << endl;
+    
 }
 
 void Controller :: tryNumbers(int sent)
